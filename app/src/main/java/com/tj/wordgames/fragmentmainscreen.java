@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -67,8 +66,14 @@ public class fragmentmainscreen extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(editText != null){
-                    // Do something
+                if(!editText.getText().toString().matches("")){
+                    SaveDialogFragment dialog = new SaveDialogFragment();
+
+                    Bundle args = new Bundle();
+                    args.putString("text", editText.getText().toString());
+                    dialog.setArguments(args);
+
+                    dialog.show(getActivity().getFragmentManager(), "");
                 } else{
                     Toast.makeText(getActivity(), "Enter text", Toast.LENGTH_SHORT).show();
                 }
